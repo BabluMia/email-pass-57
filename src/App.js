@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import app from './firebase.init';
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
@@ -78,6 +78,12 @@ function App() {
       console.log("Email verification");
     })
   }
+  const passwordReset = () =>{
+    sendPasswordResetEmail(auth , email)
+    .then(()=>{
+      console.log("send email");
+    })
+  }
   return (
     <div >
       <div className="regristration w-50 mx-auto">
@@ -101,6 +107,7 @@ function App() {
             Please provide a valid password.
           </Form.Control.Feedback>
         </Form.Group>
+        <button onClick={passwordReset} className='btn btn-primary'> Forget Password?</button>
         <p>{error}</p>
 
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
